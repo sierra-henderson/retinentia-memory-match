@@ -11,6 +11,7 @@ var gamesPlayed = 0;
 var gamesPlayedElement = document.getElementById('gamesPlayed');
 var attemptsElement= document.getElementById('attempts');
 var accuracyElement = document.getElementById('accuracy');
+var modalButton = document.getElementById('modalButton');
 
 
 gameCards.addEventListener('click', handleClick);
@@ -58,5 +59,26 @@ function displayStats() {
 }
 
 function calculateAccuracy(attempts, matches) {
+  if (attempts === 0) {
+    return 0 + "%";
+  }
   return Math.trunc(matches / attempts * 100) + "%";
 }
+
+function resetGame() {
+  attempts = 0;
+  matches = 0;
+  gamesPlayed++;
+  displayStats();
+  resetCards();
+  modalOverlay.classList.add('hidden');
+}
+
+function resetCards() {
+  var hiddenCards = document.querySelectorAll('.card-back');
+  for (var i = 0; i < hiddenCards.length; i++) {
+    hiddenCards[i].classList.remove('hidden');
+  }
+}
+
+modalButton.addEventListener('click', resetGame);
