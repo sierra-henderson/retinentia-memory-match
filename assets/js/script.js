@@ -12,7 +12,10 @@ var gamesPlayedElement = document.getElementById('gamesPlayed');
 var attemptsElement= document.getElementById('attempts');
 var accuracyElement = document.getElementById('accuracy');
 var modalButton = document.getElementById('modalButton');
+var classNames = ['js-logo', 'js-logo', 'css-logo', 'css-logo', 'docker-logo', 'docker-logo', 'github-logo', 'github-logo', 'html-logo', 'html-logo', 'mysql-logo', 'mysql-logo', 'node-logo', 'node-logo', 'php-logo', 'php-logo', 'react-logo', 'react-logo'];
+var cardFront = document.querySelectorAll('.card-front');
 
+shuffleClassNames();
 
 gameCards.addEventListener('click', handleClick);
 
@@ -72,6 +75,7 @@ function resetGame() {
   displayStats();
   resetCards();
   modalOverlay.classList.add('hidden');
+  shuffleClassNames();
 }
 
 function resetCards() {
@@ -82,3 +86,19 @@ function resetCards() {
 }
 
 modalButton.addEventListener('click', resetGame);
+
+function shuffleClassNames() {
+  for (var i = 0; i < classNames.length; i++) {
+    var random = Math.floor(Math.random() * classNames.length);
+    var placeholder = classNames[i];
+    classNames[i] = classNames[random];
+    classNames[random] = placeholder;
+  }
+  displayShuffledCards();
+}
+
+function displayShuffledCards() {
+  for (var i = 0; i < cardFront.length; i++) {
+    cardFront[i].className = 'card-front ' + classNames[i];
+  }
+}
