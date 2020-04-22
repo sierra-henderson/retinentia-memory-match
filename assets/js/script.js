@@ -16,6 +16,7 @@ var classNames = ['js-logo', 'js-logo', 'css-logo', 'css-logo', 'docker-logo', '
 var cardFront = document.querySelectorAll('.card-front');
 
 shuffleClassNames();
+createCards();
 
 gameCards.addEventListener('click', handleClick);
 
@@ -76,6 +77,7 @@ function resetGame() {
   resetCards();
   modalOverlay.classList.add('hidden');
   shuffleClassNames();
+  createCards();
 }
 
 function resetCards() {
@@ -94,11 +96,19 @@ function shuffleClassNames() {
     classNames[i] = classNames[random];
     classNames[random] = placeholder;
   }
-  displayShuffledCards();
 }
 
-function displayShuffledCards() {
-  for (var i = 0; i < cardFront.length; i++) {
-    cardFront[i].className = 'card-front ' + classNames[i];
+function createCards() {
+  gameCards.innerHTML = '';
+  for (var i = 0; i < classNames.length; i++) {
+    var cardContainer = document.createElement('div');
+    cardContainer.className = 'card col-2';
+    var frontCard = document.createElement('div');
+    frontCard.className = 'card-front ' + classNames[i];
+    var backCard = document.createElement('div');
+    backCard.className = 'card-back';
+    cardContainer.append(frontCard);
+    cardContainer.append(backCard);
+    gameCards.append(cardContainer);
   }
 }
