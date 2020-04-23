@@ -3,9 +3,10 @@
 }
 
 body {
-  height: 97vh;
+  height: 100vh;
   background-image: url('../images/lfz-background.jpg');
   background-size: cover;
+  background-repeat: no-repeat;
 }
 
 aside, main {
@@ -16,11 +17,14 @@ aside, main {
 aside {
   flex-direction: column;
   justify-content: center;
+  height: 100%;
 }
 
 main {
   flex-wrap: wrap;
   margin: 0 auto;
+  justify-content: space-around;
+  align-content: space-around;
 }
 
 .row:first-child {
@@ -32,21 +36,42 @@ main {
 
 h1 {
   font-size: 3rem;
+  text-align: center;
 }
 
 .row:nth-child(2) {
   height: 90%;
+  display: flex;
+  align-items: center;
 }
 
-.stat {
+.stat, .stat.main {
   background-color: #86CEEB;
-  height: 13%;
-  margin: 1.5% 10%;
+  margin: 5px 10%;
   display: flex;
   justify-content: center;
   align-items: center;
   font-size: 1.5rem;
   text-align: center;
+
+}
+
+.stat:first-child {
+  margin: 0 10%;
+}
+
+.stat.main {
+  margin: 5px 10%;
+  height: 13%;
+}
+
+.stat-container {
+  height: 26%;
+  margin-bottom: 10px;
+}
+
+.stat-container .stat {
+  height: 50%;
 }
 
 .card {
@@ -54,7 +79,7 @@ h1 {
   background-size: cover;
   background-position: center;
   height: 29%;
-  margin: 2% 0.3%;
+  margin: 1% 0.3%;
   position: relative;
 }
 
@@ -119,21 +144,111 @@ h1 {
 
 .modal-content {
   background-color: #57ABF4;
-  height: 500px;
-  width: 500px;
+  height: 50vmin;
+  width: 50vmin;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
-  font-size: 2.5rem;
+  font-size: 2rem;
   text-align: center;
   align-items: center;
 }
 
 .modal-content button {
-  font-size: 2rem;
+  font-size: 1.5rem;
   width: 65%;
   border-radius: 1rem;
   padding: 10px;
+}
+
+@media only screen and (max-width: 700px) {
+  .modal-content{
+    font-size: 1.2rem;
+    height: 70vmin;
+    width: 70vmin;
+  }
+  .modal-content button {
+    font-size: 0.75rem;
+  }
+  .stat {
+    font-size: 1rem;
+  }
+}
+
+
+
+@media only screen and (max-aspect-ratio: 1/1) {
+  body {
+    height: 100vh;
+  }
+  h1 {
+    font-size: 3.5rem;
+  }
+  .col-2, .col-10 {
+    width: 100%;
+  }
+
+  .container {
+    width: 100%;
+    max-width: 700px;
+    margin: 0 auto;
+  }
+
+  aside {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    height: auto;
+  }
+
+  main {
+    justify-content: flex-start;
+  }
+  .row {
+    flex-direction: column;
+  }
+  .stat {
+    margin: 5px;
+    padding: 20px 0;
+    font-size: 1.5rem;
+  }
+
+  .stat-container {
+    flex-basis: 33%;
+    align-self: stretch;
+  }
+
+  .stat-container > .stat,
+  .stat.main {
+    margin: 5px;
+  }
+
+  .main {
+    flex-basis: 100%;
+  }
+
+  main {
+    align-content: center;
+  }
+
+  .col-4-sm {
+    flex-basis: 19%;
+    height: 19%;
+  }
+  .card {
+    margin: 0.5%;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .stat {
+    padding: 10px 0;
+    font-size: 1rem;
+  }
+  h1 {
+    font-size: 2.5rem;
+  }
 }
 
 .hidden {

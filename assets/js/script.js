@@ -102,7 +102,7 @@ function createCards() {
   gameCards.innerHTML = '';
   for (var i = 0; i < classNames.length; i++) {
     var cardContainer = document.createElement('div');
-    cardContainer.className = 'card col-2';
+    cardContainer.className = 'card col-2 col-4-sm';
     var frontCard = document.createElement('div');
     frontCard.className = 'card-front ' + classNames[i];
     var backCard = document.createElement('div');
