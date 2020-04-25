@@ -11,6 +11,10 @@
   margin-bottom: 0.5rem;
 }
 
+span {
+    display: block;
+  }
+
 .col-1 {
   width: 8%;
 }
