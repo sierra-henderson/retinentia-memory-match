@@ -4,11 +4,27 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Memory Match</title>
+  <script src="https://kit.fontawesome.com/d9e5edd868.js" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="assets/css/fonts.css">
   <link rel="stylesheet" href="assets/css/grid.css">
   <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
+  <audio id="moodMusic">
+    <source src="assets/audio/Witch-Hearth.mp3" type="audio/mpeg">
+  </audio>
+  <audio id="match">
+    <source src="assets/audio/match.mp3" type="audio/mpeg">
+  </audio>
+  <audio id="noMatch">
+    <source src="assets/audio/no-match.mp3" type="audio/mpeg">
+  </audio>
+  <audio id="lose">
+    <source src="assets/audio/door-creak.mp3" type="audio/mpeg">
+  </audio>
+  <audio id="flip">
+    <source src="assets/audio/Card-flip.mp3" type="audio/mpeg">
+  </audio>
   <div class="container hidden">
     <div class="row">
       <header>
@@ -30,8 +46,10 @@
       </aside>
     </div>
     <div class="row">
-
       <main class="col-10" id="gameCards"></main>
+    </div>
+    <div class="icon-container">
+      <i id="soundIcon" class="fas fa-volume-up"></i>
     </div>
   </div>
   <div class="modal-overlay">
