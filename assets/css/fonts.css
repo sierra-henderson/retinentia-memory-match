@@ -1,13 +1,4 @@
 @font-face {
-  font-family: 'Norsk';
-  font-style: normal;
-  font-weight: normal;
-  src: url('norsk-webfont.woff') format('woff');
-}
-
-
-
-@font-face {
   font-family: 'Norse';
   font-style: normal;
   font-weight: normal;
@@ -21,7 +12,6 @@
   src: url('Norsebold.otf') format('opentype');
 }
 
-/* devanagari */
 @font-face {
   font-family: 'Teko';
   font-style: normal;

@@ -8,19 +8,6 @@ body {
   background-size: cover;
 }
 
-/* header {
-  text-align: center;
-} */
-
-/* h1 {
-  font-family: 'Norsk';
-  color: white;
-  text-transform: uppercase;
-  font-size: 3rem;
-  font-weight: bold;
-  text-align: center;
-} */
-
 header img {
   height: 50px;
 }
@@ -59,12 +46,8 @@ main {
   background: linear-gradient(to right, rgba(95, 94, 87, 0.5), rgba(255, 253, 234, 0.5)), url(../images/witchcraft/fog.png);
   background-size: cover;
   margin: 0 10%;
-  /* display: flex;
-  justify-content: center;
-  align-items: center; */
   font-size: 1.5rem;
   text-align: center;
-
   border-radius: 0.5rem;
 }
 
@@ -85,11 +68,12 @@ span {
   margin: 2% 0.3%;
   position: relative;
   border: 2px solid #FAE193;
+  cursor: pointer;
 }
 
 .card:hover {
-  transform: translateY(-20px);
-  box-shadow: 0 0 10px rgb(253, 241, 206);
+  transform: scaleY(1.1);
+  box-shadow: 0 0 15px rgb(253, 241, 206);
 }
 
 .card-front, .card-back {
@@ -148,43 +132,6 @@ span {
   background-image: url('../images/witchcraft/skull.jpg');
 }
 
-
-.arryn {
-  background-image: url('../images/got-images/arryn.jpg');
-}
-
-.baratheon {
-  background-image: url('../images/got-images/baratheon-color.jpg');
-}
-
-.greyjoy {
-  background-image: url('../images/got-images/greyjoy.jpg');
-}
-
-.martell {
-  background-image: url('../images/got-images/martell.jpg');
-}
-
-.stark {
-  background-image: url('../images/got-images/stark-light.jpg');
-}
-
-.targaryen {
-  background-image: url('../images/got-images/targaryen.jpg');
-}
-
-.tully {
-  background-image: url('../images/got-images/tully.jpg');
-}
-
-.tyrell {
-  background-image: url('../images/got-images/tyrell.jpg');
-}
-
-.lannister {
-  background-image: url('../images/got-images/lannister.jpg');
-}
-
 .modal-overlay {
   background-color: rgba(0, 0, 0, 0.6);
   position: fixed;
@@ -213,7 +160,7 @@ span {
   flex-direction: column;
   justify-content: space-evenly;
   text-align: center;
-  align-items: space-evenly;
+  align-items: center;
   width: 80%;
   z-index: 3;
 }
@@ -251,16 +198,18 @@ span {
   color: #CFB53B;
   text-transform: uppercase;
   background-color: rgba(0, 0, 0, 0);
+  cursor: pointer;
 }
 
-.icon-container {
-  height: 50px;
-  width: 50px;
+#soundControls button {
+  margin: 10px;
+}
+
+button:hover {
+  transform: scale(1.1);
 }
 
 i {
-  width: 50px;
-  height: 50px;
   color: white;
   margin-left: 30px;
 }
@@ -286,7 +235,6 @@ i {
 
   .row:nth-child(2) {
     height: 85%;
-
   }
 
   .modal-content{
@@ -294,12 +242,15 @@ i {
     height: 90vh;
     width: 70vw;
   }
+
   .modal-content button {
     font-size: 0.75rem;
   }
+
   .stat {
     font-size: 1rem;
   }
+
   header img {
     width: 90%;
   }
@@ -311,6 +262,7 @@ i {
   body {
     height: 100vh;
   }
+
   header img {
     width: 75%;
     height: auto;
@@ -329,7 +281,7 @@ i {
 
   .container {
     width: 100%;
-    max-width: 700px;
+    max-width: 900px;
     margin: 0 auto;
     height: auto;
   }
@@ -346,6 +298,7 @@ i {
   main {
     justify-content: space-around;
   }
+
   .row {
     flex-direction: column;
   }
@@ -388,11 +341,28 @@ i {
   .col-10 {
     justify-content: center;
   }
+
   .card {
     margin: 1%;
+    height: 10vh;
+    width: 28%;
   }
+
+  #gameCards .card {
+    width: 28%;
+  }
+
   .row:nth-child(2) {
     height: auto;
+  }
+
+  .icon-container {
+    display: flex;
+    justify-content: center;
+  }
+
+  i {
+    margin-left: 0;
   }
 }
 
@@ -401,8 +371,19 @@ i {
     padding: 10px 0;
     font-size: 1rem;
   }
+
   h1 {
     font-size: 2.5rem;
+  }
+
+  #gameCards .card {
+    height: 70px;
+    width: 25%;
+  }
+
+  aside {
+    width: 100%;
+    justify-content: space-between;
   }
 }
 
