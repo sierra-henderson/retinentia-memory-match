@@ -102,6 +102,10 @@ function handleClick(event) {
         matches++;
         displayStats();
         if (matches === maxMatches) {
+          if (soundEffectsSwitch.textContent === 'Off' && backgoundMusicSwitch.textContent === 'On') {
+            matchAudio.muted = false;
+            matchAudio.play();
+          }
           clearInterval(id);
           modalOverlay.classList.remove('hidden');
           modalContent.textContent = "Congratulations! You've found all of the ingredients";
@@ -147,6 +151,14 @@ function resetGame(time) {
   matches = 0;
   gamesPlayed++;
   moodMusic.muted = false;
+  if (backgoundMusicSwitch.textContent === 'On') {
+    moodMusic.play();
+  }
+  if (soundEffectsSwitch.textContent === 'On') {
+    matchAudio.muted = false;
+    loseAudio.muted = false;
+    flipAudio.muted = false;
+  }
   soundIcon.className = 'fas fa-volume-up'
   displayStats();
   resetCards();
@@ -159,10 +171,6 @@ function resetGame(time) {
 }
 
 function resetCards() {
-  matchAudio.muted = true;
-  noMatchAudio.muted = true;
-  loseAudio.muted = true;
-  flipAudio.muted = true;
   var hiddenCards = document.querySelectorAll('.card-back');
   for (var i = 0; i < hiddenCards.length; i++) {
     hiddenCards[i].classList.remove('hidden');
@@ -225,10 +233,12 @@ function soundModal() {
 
 function toggleBackgroundMusic() {
   if (backgoundMusicSwitch.textContent === "Off") {
-    moodMusic.muted === 'false';
+    moodMusic.muted = false;
     moodMusic.play();
     backgoundMusicSwitch.textContent = 'On';
+    loseAudio.muted = false;
   } else {
+    loseAudio.muted = true;
     moodMusic.pause();
     moodMusic.currentTime = 0;
     backgoundMusicSwitch.textContent = 'Off';
@@ -238,13 +248,11 @@ function toggleBackgroundMusic() {
 function toggleSoundEffects() {
   if (soundEffectsSwitch.textContent === "Off") {
     matchAudio.muted = false;
-    noMatchAudio.muted = false;
     loseAudio.muted = false;
     flipAudio.muted = false;
     soundEffectsSwitch.textContent = 'On';
   } else {
     matchAudio.muted = true;
-    noMatchAudio.muted = true;
     loseAudio.muted = true;
     flipAudio.muted = true;
     soundEffectsSwitch.textContent = 'Off';

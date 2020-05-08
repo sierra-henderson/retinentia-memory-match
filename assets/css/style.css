@@ -26,6 +26,8 @@ aside {
 main {
   flex-wrap: wrap;
   margin: 0 auto;
+  justify-content: center;
+  align-content: center;
 }
 
 .row:first-child {
@@ -65,7 +67,7 @@ span {
 
 .card {
   height: 29%;
-  margin: 2% 0.3%;
+  margin: 1% 0.3%;
   position: relative;
   border: 2px solid #FAE193;
   cursor: pointer;
@@ -208,6 +210,12 @@ span {
 button:hover {
   transform: scale(1.1);
 }
+/*
+.icon-container {
+  position: absolute;
+  top: 30px;
+  right: 30px;
+} */
 
 i {
   color: white;
