@@ -23,14 +23,19 @@ var classNames = ['cauldron', 'cauldron', 'crystal', 'crystal', 'flowers', 'flow
 var cardFront = document.querySelectorAll('.card-front');
 var num;
 var id = setInterval(countdown, 100);
-
-function init() {
-  shuffleClassNames();
-  createCards();
-  timeLeft.textContent = (num / 10).toFixed(1) + "s";
-  container.classList.remove('hidden');
-  modalOverlay.classList.add('hidden');
-}
+var moodMusic = document.getElementById('moodMusic');
+var matchAudio = document.getElementById('match');
+var noMatchAudio = document.getElementById('noMatch')
+var loseAudio = document.getElementById('lose');
+var flipAudio = document.getElementById('flip');
+var soundIcon = document.getElementById('soundIcon');
+var mainModal = document.getElementById('mainModal');
+var soundControls = document.getElementById('soundControls');
+var backToGame = document.getElementById('backToGame');
+var backgoundMusic = document.getElementById('backgroundMusic')
+var soundEffects = document.getElementById('soundEffects')
+var backgoundMusicSwitch = document.getElementById('backgroundMusicSwitch')
+var soundEffectsSwitch = document.getElementById('soundEffectsSwitch')
 
 normalButton.addEventListener('click', function() {
   if (container.className.includes('hidden')) {
@@ -50,13 +55,34 @@ expertButton.addEventListener('click', function () {
   }
 });
 
+soundIcon.addEventListener('click', soundModal);
 
-gameCards.addEventListener('click', handleClick);
+backToGame.addEventListener('click', resumeTimer);
+
+backgoundMusic.addEventListener('click', toggleBackgroundMusic);
+
+soundEffects.addEventListener('click', toggleSoundEffects)
+
+function init() {
+  matchAudio.muted = true;
+  noMatchAudio.muted = true;
+  loseAudio.muted = true;
+  flipAudio.muted = true;
+  shuffleClassNames();
+  createCards();
+  timeLeft.textContent = (num / 10).toFixed(1) + "s";
+  container.classList.remove('hidden');
+  modalOverlay.classList.add('hidden');
+  gameCards.addEventListener('click', handleClick);
+}
 
 function handleClick(event) {
   if(event.target.className.indexOf("card-back") === -1) {
     return;
   }
+  matchAudio.pause();
+  matchAudio.currentTime = 0;
+  flipAudio.play();
   event.target.className += ' hidden';
   if (!firstCardClicked) {
     firstCardClicked = event.target;
@@ -66,24 +92,35 @@ function handleClick(event) {
     secondCardClasses = secondCardClicked.nextElementSibling.className;
     gameCards.removeEventListener("click", handleClick);
     attempts++;
-
     if (firstCardClasses === secondCardClasses){
       if (firstCardClasses.includes('cauldron') && secondCardClasses.includes('cauldron') && matches < 8) {
+        firstCardClicked = null;
+        secondCardClicked = null;
         loseGame();
       } else {
+        matchAudio.play();
         matches++;
         displayStats();
         if (matches === maxMatches) {
+          if (soundEffectsSwitch.textContent === 'Off' && backgoundMusicSwitch.textContent === 'On') {
+            matchAudio.muted = false;
+            matchAudio.play();
+          }
           clearInterval(id);
           modalOverlay.classList.remove('hidden');
           modalContent.textContent = "Congratulations! You've found all of the ingredients";
-          modalParagraph.textContent = "I'd get out of the cottage while you still can..."
+          modalParagraph.textContent = "Want to try to grab more?";
+          setTimeout(function() {
+            moodMusic.pause()
+            moodMusic.currentTime = 0;
+          }, 1000);
         }
         gameCards.addEventListener('click', handleClick);
         firstCardClicked = null;
         secondCardClicked = null;
       }
     } else {
+      noMatchAudio.play();
       setTimeout(function() {
         displayStats();
         firstCardClicked.classList.remove('hidden');
@@ -113,6 +150,16 @@ function resetGame(time) {
   attempts = 0;
   matches = 0;
   gamesPlayed++;
+  moodMusic.muted = false;
+  if (backgoundMusicSwitch.textContent === 'On') {
+    moodMusic.play();
+  }
+  if (soundEffectsSwitch.textContent === 'On') {
+    matchAudio.muted = false;
+    loseAudio.muted = false;
+    flipAudio.muted = false;
+  }
+  soundIcon.className = 'fas fa-volume-up'
   displayStats();
   resetCards();
   modalOverlay.classList.add('hidden');
@@ -120,6 +167,7 @@ function resetGame(time) {
   createCards();
   num = time;
   id = setInterval(countdown, 100);
+  gameCards.addEventListener('click', handleClick);
 }
 
 function resetCards() {
@@ -166,9 +214,74 @@ function countdown() {
 }
 
 function loseGame() {
+  moodMusic.pause();
+  moodMusic.currentTime = 0;
+  loseAudio.play();
   clearInterval(id);
   timeLeft.textContent = (num / 10).toFixed(1) + "s";
   modalOverlay.classList.remove('hidden');
-  modalContent.textContent = 'You lose!'
+  modalContent.textContent = 'She found you!'
   modalParagraph.textContent = 'Want to try again?';
+}
+
+function soundModal() {
+  mainModal.classList.add('hidden');
+  modalOverlay.classList.remove('hidden');
+  soundControls.classList.remove('hidden');
+  clearInterval(id);
+}
+
+function toggleBackgroundMusic() {
+  if (backgoundMusicSwitch.textContent === "Off") {
+    moodMusic.muted = false;
+    moodMusic.play();
+    backgoundMusicSwitch.textContent = 'On';
+    loseAudio.muted = false;
+  } else {
+    loseAudio.muted = true;
+    moodMusic.pause();
+    moodMusic.currentTime = 0;
+    backgoundMusicSwitch.textContent = 'Off';
+  }
+}
+
+function toggleSoundEffects() {
+  if (soundEffectsSwitch.textContent === "Off") {
+    matchAudio.muted = false;
+    loseAudio.muted = false;
+    flipAudio.muted = false;
+    soundEffectsSwitch.textContent = 'On';
+  } else {
+    matchAudio.muted = true;
+    loseAudio.muted = true;
+    flipAudio.muted = true;
+    soundEffectsSwitch.textContent = 'Off';
+  }
+}
+
+function resumeTimer() {
+  id = setInterval(countdown, 100);
+  modalOverlay.classList.add('hidden');
+  soundControls.classList.add('hidden');
+  mainModal.classList.remove('hidden');
+}
+
+function handleSound() {
+  if (soundIcon.className === 'fas fa-volume-up') {
+    moodMusic.play();
+    moodMusic.muted = false;
+    matchAudio.muted = false;
+    noMatchAudio.muted = false;
+    loseAudio.muted = false;
+    flipAudio.muted = false;
+    soundIcon.className = 'fas fa-volume-mute';
+  } else {
+    matchAudio.muted = true;
+    noMatchAudio.muted = true;
+    loseAudio.muted = true;
+    flipAudio.muted = true;
+    moodMusic.pause();
+    moodMusic.currentTime = 0;
+    soundIcon.className = 'fas fa-volume-up';
+  }
 }
