@@ -225,7 +225,7 @@ i {
 @media only screen and (max-width: 900px) {
   .modal-content{
     font-size: 1.2rem;
-    height: 50vh;
+    height: 90vh;
     width: 70vw;
   }
 }
@@ -247,12 +247,11 @@ i {
 
   .modal-content{
     font-size: 1.2rem;
-    height: 90vh;
     width: 70vw;
   }
 
   .modal-content button {
-    font-size: 0.75rem;
+    font-size: 1.5rem;
   }
 
   .stat {
@@ -265,6 +264,21 @@ i {
 }
 
 
+@media only screen and (max-width: 650px) {
+  .modal-content h2 {
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+  }
+
+  .modal-content p {
+    font-size: 1.2rem;
+    margin-bottom: 15px
+  }
+
+  .modal-content button {
+    font-size: 1.3rem;
+  }
+}
 
 @media only screen and (max-aspect-ratio: 1/1) {
   body {
