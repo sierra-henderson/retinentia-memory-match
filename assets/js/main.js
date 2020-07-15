@@ -13,14 +13,11 @@ var gamesPlayed = 0;
 var gamesPlayedElement = document.getElementById('gamesPlayed');
 var attemptsElement= document.getElementById('attempts');
 var accuracyElement = document.getElementById('accuracy');
-var buttonContainer = document.querySelector('.button-container')
 var normalButton = document.getElementById('normal');
 var expertButton = document.getElementById('expert');
-var modalButton = document.getElementById('modalButton');
 var modalParagraph = document.getElementById('modalParagraph')
 var timeLeft = document.getElementById('timeLeft')
 var classNames = ['cauldron', 'cauldron', 'crystal', 'crystal', 'flowers', 'flowers', 'lavender', 'lavender', 'mushroom', 'mushroom', 'potion', 'potion', 'runes', 'runes', 'salt', 'salt', 'skull', 'skull']
-var cardFront = document.querySelectorAll('.card-front');
 var num;
 var id = setInterval(countdown, 100);
 var moodMusic = document.getElementById('moodMusic');
@@ -264,24 +261,4 @@ function resumeTimer() {
   modalOverlay.classList.add('hidden');
   soundControls.classList.add('hidden');
   mainModal.classList.remove('hidden');
-}
-
-function handleSound() {
-  if (soundIcon.className === 'fas fa-volume-up') {
-    moodMusic.play();
-    moodMusic.muted = false;
-    matchAudio.muted = false;
-    noMatchAudio.muted = false;
-    loseAudio.muted = false;
-    flipAudio.muted = false;
-    soundIcon.className = 'fas fa-volume-mute';
-  } else {
-    matchAudio.muted = true;
-    noMatchAudio.muted = true;
-    loseAudio.muted = true;
-    flipAudio.muted = true;
-    moodMusic.pause();
-    moodMusic.currentTime = 0;
-    soundIcon.className = 'fas fa-volume-up';
-  }
 }

@@ -210,12 +210,6 @@ span {
 button:hover {
   transform: scale(1.1);
 }
-/*
-.icon-container {
-  position: absolute;
-  top: 30px;
-  right: 30px;
-} */
 
 i {
   color: white;
